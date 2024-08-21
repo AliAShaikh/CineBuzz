@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CineBuzzstyle.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+    <title>CineBuzz Home</title>
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous">
+</script>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">CineBuzz</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link " aria-current="page" href="index.html">Discover</a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" href="forums.html">Forums</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="lists.html">Lists</a>
+                    </li>
+                    <!-- <li class="nav-item dropdown">
+                      
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Make a list</a></li>
+                        <li><a class="dropdown-item" href="#">Discover lists</a></li>
+                      </ul>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
+                    </li> -->
+                  </ul>
+                  <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link " aria-current="page" href="login.html">Login</a>
+                    </li>
+                      <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">|</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="Registration.html">Register</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link " id="logoutLink" href="#">Logout</a>
+                    </li>
+                  </ul>
+                  <form class="d-flex" id="search_form">
+                    <input class="form-control me-2" id="search_input" type="search" placeholder="Search" aria-label="Search" >
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                  </form>
+                </div>
+              </div>          
+            </nav>
+    </header>
+    <div class="home_backdrop">
+      <!-- <img src="eg.jpg" alt="">
+      <h1>Movie Title</h1>
+      <p id="backdrop_genres">genres</p><br>
+      <p id="backdrop_desc">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, libero placeat hic pariatur maxime excepturi debitis reiciendis. Accusantium vel cupiditate recusandae, sit, a placeat modi iure et qui nam voluptatum!</p> -->
+    </div>
+    <main>
+      <section class="splide" id="searched_movies">
+        <h1 >Search results </h1>
+        <div class="splide__track">
+              <ul class="splide__list" id="searched_movies_wrapper">
+                  <!-- Popular movies will be appended here -->
+              </ul>
+          </div>
+      </section>
+
+        <section class="splide" id="popular_movies">
+          <h1 class="pop_heading">Popular </h1>
+          <div class="splide__track">
+                <ul class="splide__list" id="popular_movies_wrapper">
+                    <!-- Popular movies will be appended here -->
+                </ul>
+            </div>
+        </section>
+
+        <section class="splide" id="top_movies">
+          <h1>Top Rated</h1>
+          <div class="splide__track">
+                <ul class="splide__list" id="top_movies_wrapper">
+                    <!-- Top movies will be appended here -->
+                </ul>
+            </div>
+        </section>
+
+        <section class="splide" id="upcoming_movies">
+          <h1>Family</h1>
+          <div class="splide__track">
+                <ul class="splide__list" id="upcoming_movies_wrapper">
+                    <!-- Upcoming movies will be appended here -->
+                </ul>
+            </div>
+        </section>
+
+        <section class="splide" id="animated_movies">
+          <h1>Animation</h1>
+          <div class="splide__track">
+                <ul class="splide__list" id="animated_movies_wrapper">
+                    <!-- Upcoming movies will be appended here -->
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="movie_list.js"></script>
+    <script>
+      document.getElementById('logoutLink').addEventListener('click', async (event) => {
+          event.preventDefault();
+          const response = await fetch('/users/logout', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+          });
+          if (response.ok) {
+              window.location.href = 'index.html';
+          } else {
+              alert('Logout failed');
+          }
+      });
+  </script>
+</body>
+</html>

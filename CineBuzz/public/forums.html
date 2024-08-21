@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Forums</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(54, 54, 54);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #fcfcfc;
+        }
+
+        form {
+            background: rgb(83, 121, 96);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            color:#fff;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .card-body div{
+            padding: 0px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            background: rgb(30, 56, 38);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            background: rgb(19, 46, 28);
+        }
+
+        .card {
+            background-color: rgb(83, 121, 96);
+            border-radius: 5px;
+            padding: 0px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            text-decoration: none;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">CineBuzz</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="forums.html">Forums</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="lists.html">Lists</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Forums</h1>
+        <form id="createForumForm">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" required>
+
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" rows="3" required></textarea>
+
+            <button type="submit" class="btn btn-primary">Create Forum</button>
+        </form>
+        <hr>
+        <div id="forumsList"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('createForumForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const response = await fetch('/forums', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ title, description }),
+            });
+            if (response.ok) {
+                loadForums();
+            } else {
+                alert('Error creating forum. Ensure you are logged in.');
+            }
+        });
+
+        async function loadForums() {
+            const response = await fetch('/forums');
+            const forums = await response.json();
+            const forumsList = document.getElementById('forumsList');
+            forumsList.innerHTML = forums.map(forum => `
+                <div class="card">
+                    <div class="card-body" style="padding=0px">
+                        <h5 class="card-title">${forum.title}</h5>
+                        <p class="card-text">${forum.description}</p>
+                        <a href="forum.html?articleNo=${forum.articleno}" class="btn btn-primary">View Comments</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        loadForums();
+    </script>
+</body>
+</html>

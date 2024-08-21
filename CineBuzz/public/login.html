@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgb(54, 54, 54);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-image: url("49691824.jpg");
+      background-size: cover;
+    }
+    #loginForm {
+      background-color: rgb(50, 116, 55);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+    label {
+      color: #ffffff;
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    input[type="email"],
+    input[type="password"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: rgb(30, 56, 38);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: rgb(19, 46, 28);
+    }
+    </style>
+</head>
+<body>
+  <form id="loginForm">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+    <button type="submit">Login</button>
+  </form>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(event.target);
+      const data = Object.fromEntries(formData);
+
+      try {
+        const response = await fetch('/users/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        window.location.href = '/index.html';
+      } else {
+        const error = await response.json();
+        console.error('Error:', error);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  });
+</script>
+</body>
+</html>
