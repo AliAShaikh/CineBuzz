@@ -4,5 +4,6 @@ Home page:
 
 ![chrome_ng4IlqUNmM-ezgif com-resize](https://github.com/user-attachments/assets/b7cc80fc-e214-4571-b492-f21b0873e3ea)
 
-  Searching:
-  ![chrome_mqeqZWrK7f-ezgif com-resize](https://github.com/user-attachments/assets/e3de8931-f55d-469b-b779-32b8da05d7eb)
+      Searching:
+      
+      ![chrome_mqeqZWrK7f-ezgif com-resize](https://github.com/user-attachments/assets/e3de8931-f55d-469b-b779-32b8da05d7eb)
