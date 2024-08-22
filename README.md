@@ -3,3 +3,4 @@ This is a project i did with my buddy in the 3rd semester of university for a We
 Home page:
 https://github.com/user-attachments/assets/4172b6c1-f628-4b66-bf52-3159a1b36b5c
 
+![chrome_Qi1p3aFyJq](https://github.com/user-attachments/assets/1ba8f583-1d21-45f1-b9b1-df34103fa2b3)
